@@ -32,7 +32,7 @@ module Blind
   end
 
   module ClassMethods
-    # Allows views rendering in controller tests.
+    # Allows view rendering in controller tests.
     def render_views!
       self.render_views = true
     end
