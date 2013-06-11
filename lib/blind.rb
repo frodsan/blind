@@ -1,6 +1,12 @@
 require 'active_support/concern'
 require 'active_support/core_ext/class/attribute'
 
+# This is adapted version of RSpec::Rails::ViewRendering
+# https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/view_rendering.rb#L27.
+#
+# It encourages more isolated testing by not rendering
+# views by default in controller tests. You can change
+# the default behaviour using #render_views!.
 module Blind
   extend ActiveSupport::Concern
 
@@ -26,6 +32,7 @@ module Blind
   end
 
   module ClassMethods
+    # Allows views rendering in controller tests.
     def render_views!
       self.render_views = true
     end
