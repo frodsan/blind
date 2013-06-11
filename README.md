@@ -43,8 +43,7 @@ end
 ```
 
 If you want to assert against the contents of the
-rendered view in a controller test, you can use the
-`render_views!` method:
+rendered view, you can use the `render_views!` method:
 
 ```ruby
 class HomeControllerTest < ActionController::TestCase
