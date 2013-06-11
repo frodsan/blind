@@ -1,2 +1,3 @@
 actionpack -v 3.2.13
 minitest -v 4.7.4
+activesupport -v 3.2.13
