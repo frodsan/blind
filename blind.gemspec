@@ -17,4 +17,7 @@ Gem::Specification.new do |s|
     '*.gemspec',
     'test/*.*'
   ]
+
+  s.add_development_dependency 'actionpack'
+  s.add_development_dependency 'minitest', '4.7.4'
 end
