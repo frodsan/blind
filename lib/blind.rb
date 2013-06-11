@@ -1,7 +1,7 @@
 require 'active_support/concern'
 require 'active_support/core_ext/class/attribute'
 
-# This is adapted version of RSpec::Rails::ViewRendering
+# This is an adapted version of RSpec::Rails::ViewRendering
 # https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/view_rendering.rb#L27.
 #
 # It encourages more isolated testing by not rendering
