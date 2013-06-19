@@ -56,3 +56,9 @@ class HomeControllerTest < ActionController::TestCase
   end
 end
 ```
+
+Motivation
+----------
+
+Check my blog post about it:
+<http://www.frodsan.com/stubbing-views-rails-controller-testing>
