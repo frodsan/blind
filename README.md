@@ -1,7 +1,7 @@
 blind
 =====
 
-No view rendering in controller testing.
+No view rendering in Rails controller testing.
 
 Installation
 ------------
