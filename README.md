@@ -1,5 +1,5 @@
 blind
-====
+=====
 
 No view rendering in controller testing.
 
@@ -28,15 +28,9 @@ $ bundle
 Usage
 -----
 
-Include `Blind` to not render views by default
-in controller tests:
+Include the `Blind` module in your controller tests:
 
 ```ruby
-# test_helper.rb
-
-...
-require 'blind'
-
 class ActionController::TestCase
   include Blind
 end
