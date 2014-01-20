@@ -54,5 +54,6 @@ end
 Motivation
 ----------
 
-Check my blog post about it:
-<http://www.frodsan.com/stubbing-views-rails-controller-testing>
+Check this blog [post][post].
+
+[post]: http://www.frodsan.com/stubbing-views-rails-controller-testing
