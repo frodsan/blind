@@ -1,5 +1,5 @@
-require 'active_support/concern'
-require 'active_support/core_ext/class/attribute'
+require "active_support/concern"
+require "active_support/core_ext/class/attribute"
 
 # This is an adapted version of RSpec::Rails::ViewRendering
 # https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/view_rendering.rb#L27.
@@ -10,7 +10,7 @@ require 'active_support/core_ext/class/attribute'
 module Blind
   extend ActiveSupport::Concern
 
-  attr_accessor :controller
+  attr :controller
 
   included do
     class_attribute :render_views
@@ -18,9 +18,9 @@ module Blind
 
     setup do
       if !render_views
-        @_empty_view_path_set_delegator = EmptyTemplatePathSetDecorator.new controller.class.view_paths
-        controller.class.view_paths = ::ActionView::PathSet.new.push @_empty_view_path_set_delegator
-        controller.extend EmptyTemplates
+        @_empty_view_path_set_delegator = EmptyTemplatePathSetDecorator.new(controller.class.view_paths)
+        controller.class.view_paths = ::ActionView::PathSet.new.push(@_empty_view_path_set_delegator)
+        controller.extend(EmptyTemplates)
       end
     end
 
@@ -38,32 +38,23 @@ module Blind
     end
   end
 
-private
+  class EmptyTemplatePathSetDecorator < ::ActionView::Resolver # :nodoc:
+    attr :original_path_set
 
-  class EmptyTemplatePathSetDecorator < ::ActionView::Resolver
-    attr_reader :original_path_set
-
-    def initialize original_path_set
+    def initialize(original_path_set)
       @original_path_set = original_path_set
     end
 
-    def find_all *args
-      original_path_set.find_all(*args).collect do |template|
-        ::ActionView::Template.new(
-          '',
-          template.identifier,
-          template.handler,
-          {
-            virtual_path: template.virtual_path,
-            format: template.formats
-          }
-        )
+    def find_all(*args)
+      original_path_set.find_all(*args).map do |template|
+        options = { virtual_path: template.virtual_path, format: template.formats }
+        ActionView::Template.new("", template.identifier, template.handler, options)
       end
     end
   end
 
-  module EmptyTemplates
-    def prepend_view_path new_path
+  module EmptyTemplates # :nodoc:
+    def prepend_view_path(new_path)
       lookup_context.view_paths.unshift(*_path_decorator(new_path))
     end
 
@@ -73,7 +64,7 @@ private
 
     private
 
-    def _path_decorator path
+    def _path_decorator(path)
       EmptyTemplatePathSetDecorator.new(ActionView::PathSet.new(Array.wrap(path)))
     end
   end

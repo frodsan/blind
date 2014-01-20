@@ -1,6 +1,6 @@
-require 'minitest/autorun'
-require 'action_controller'
-require File.expand_path('../lib/blind', File.dirname(__FILE__))
+require "minitest/autorun"
+require "action_controller"
+require_relative "../lib/blind"
 
 SharedTestRoutes = ActionDispatch::Routing::RouteSet.new
 
@@ -8,7 +8,7 @@ module ActionController
   class Base
     include SharedTestRoutes.url_helpers
 
-    self.view_paths = File.join File.dirname(__FILE__), 'views'
+    self.view_paths = File.join File.dirname(__FILE__), "views"
   end
 
   class TestCase
@@ -18,7 +18,7 @@ module ActionController
       @routes = SharedTestRoutes
 
       @routes.draw do
-        get ':controller(/:action)'
+        get ":controller(/:action)"
       end
     end
 
@@ -41,7 +41,7 @@ class BlindControllerTest < ActionController::TestCase
     get :index
 
     assert response.body.empty?
-    assert_template 'index'
+    assert_template "index"
   end
 end
 
@@ -54,6 +54,6 @@ class UnBlindControllerTest < ActionController::TestCase
     get :index
 
     assert !response.body.empty?
-    assert_template 'index'
+    assert_template "index"
   end
 end
